@@ -14,10 +14,7 @@ module.exports = {
         .setName("play")
         .setDescription("YouTube上の動画を再生します。")
         .addStringOption(option =>
-            option
-                .setName("query")
-                .setDescription("キーワードまたはURLを入力してください。")
-                .setRequired(true)
+            option.setName("query").setDescription("キーワードまたはURLを入力してください。").setRequired(true)
         )
         .setDMPermission(false)
         .toJSON(),
@@ -149,9 +146,7 @@ module.exports = {
                         },
                         {
                             name: "投稿日",
-                            value: new Date(info.videoDetails.uploadDate).toLocaleDateString(
-                                "ja-JP"
-                            ),
+                            value: new Date(info.videoDetails.uploadDate).toLocaleDateString("ja-JP"),
                             inline: true
                         }
                     )

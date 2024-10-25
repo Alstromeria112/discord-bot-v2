@@ -8,11 +8,7 @@ const { getEnv } = require("../../util.js");
 
 /** @type {import("../../type").SlashCommand} */
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("stop")
-        .setDescription("曲を停止します。")
-        .setDMPermission(false)
-        .toJSON(),
+    data: new SlashCommandBuilder().setName("stop").setDescription("曲を停止します。").setDMPermission(false).toJSON(),
     handler: async interaction => {
         if (!interaction.inCachedGuild()) return;
 

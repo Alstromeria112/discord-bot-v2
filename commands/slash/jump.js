@@ -13,10 +13,7 @@ module.exports = {
         .setDescription("曲を複数スキップします")
         .setDMPermission(false)
         .addNumberOption(option =>
-            option
-                .setName("number")
-                .setDescription("スキップする曲数を入力してください。")
-                .setRequired(true)
+            option.setName("number").setDescription("スキップする曲数を入力してください。").setRequired(true)
         )
         .toJSON(),
     handler: async interaction => {

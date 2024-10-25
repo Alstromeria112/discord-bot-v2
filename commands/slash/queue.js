@@ -15,9 +15,7 @@ module.exports = {
             subcommand
                 .setName("list")
                 .setDescription("現在入っているキューの一覧を取得します。")
-                .addIntegerOption(option =>
-                    option.setName("page").setDescription("page number.").setRequired(false)
-                )
+                .addIntegerOption(option => option.setName("page").setDescription("page number.").setRequired(false))
         )
         .setDMPermission(false)
         .toJSON(),
@@ -59,9 +57,7 @@ module.exports = {
             }
 
             let queueSongs = queue.getQueue();
-            let queueString = queueSongs
-                .map((song, index) => `${index + 1}. ${song.title}`)
-                .join(",\n");
+            let queueString = queueSongs.map((song, index) => `${index + 1}. ${song.title}`).join(",\n");
             const embed = new EmbedBuilder()
                 .setTitle(`プレイリスト`)
                 .setDescription(`\`\`\`${queueString}\`\`\``)

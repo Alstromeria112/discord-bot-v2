@@ -15,9 +15,7 @@ module.exports = {
                 interaction.user.id !== getEnv("OWNER_ID") &&
                 !getEnv("MAINTAINERS_ID").split(",").includes(interaction.user.id)
             ) {
-                await interaction.reply(
-                    "このコマンドはbotの管理者以外実行できません。"
-                );
+                await interaction.reply("このコマンドはbotの管理者以外実行できません。");
                 return;
             }
             const embed = new EmbedBuilder()
@@ -35,7 +33,6 @@ module.exports = {
                 .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
                 .setTimestamp();
             await interaction.editReply({ embeds: [suc] });
-
         } catch (e) {
             const embed = new EmbedBuilder()
                 .setTitle(getEnv("ERROR"))
