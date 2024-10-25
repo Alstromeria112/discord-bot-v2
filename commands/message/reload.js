@@ -23,16 +23,14 @@ module.exports = {
                         `\`\`\`このコマンドはbotの管理者以外実行できません。\nThis command can only be executed by the admin of the bot.\`\`\``
                     )
                     .setColor("#ff0000")
-                    .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
-                    .setTimestamp();
+                    .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") });
                 await message.reply({ embeds: [embed] });
                 return;
             }
             const embed = new EmbedBuilder()
                 .setTitle("Reloading...")
                 .setColor("#ff0000")
-                .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
-                .setTimestamp();
+                .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") });
             const reply = await message.reply({ embeds: [embed] });
             console.log("Reloading...");
 
@@ -40,16 +38,14 @@ module.exports = {
             const suc = new EmbedBuilder()
                 .setTitle(getEnv("SUCCESS"))
                 .setColor("#00ffff")
-                .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
-                .setTimestamp();
+                .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") });
             await reply.edit({ embeds: [suc] });
         } catch (e) {
             const embed = new EmbedBuilder()
                 .setTitle(getEnv("ERROR"))
                 .setDescription(`\`\`\`${e}\`\`\``)
                 .setColor("#ff0000")
-                .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
-                .setTimestamp();
+                .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") });
             const reply = await message.reply({ embeds: [embed] });
             await reply.edit({ embeds: [embed] });
         }

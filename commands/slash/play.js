@@ -3,7 +3,7 @@
 "use strict";
 
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
-const ytdl = require("ytdl-core");
+const ytdl = require("@distube/ytdl-core");
 const ytpl = require("ytpl");
 const { GuildMusicQueue, ParsedMusicInfo } = require("../../structures/GuildMusicQueue.js");
 const { getEnv } = require("../../util.js");
@@ -32,13 +32,13 @@ module.exports = {
                 const embed = new EmbedBuilder()
                     .setTitle(getEnv("ERROR"))
                     .setDescription(`\`\`\`先にボイスチャンネルに参加してください。\`\`\``)
-                    .setColor("#ff0000")
-                    .setTimestamp();
+                    .setColor("#ff0000");
                 await interaction.editReply({ embeds: [embed] });
                 return;
             }
             await interaction.editReply("リストの中身を取得中...");
             try {
+                // @ts-ignore
                 const queue = GuildMusicQueue.getOrCreate(channel);
                 const { items, author, title, views, thumbnails, description, url } = await ytpl(playlistId);
 
@@ -59,8 +59,7 @@ module.exports = {
                         .setURL(parsedRequest.videoUrl)
                         .setImage(parsedRequest.videoThumbnailUrl)
                         .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
-                        .setColor("#00ffff")
-                        .setTimestamp();
+                        .setColor("#00ffff");
                     await interaction.editReply({ embeds: [embed] });
                 }
 
@@ -87,8 +86,7 @@ module.exports = {
                     )
                     .setImage(thumbnails[0].url)
                     .setColor("#00ffff")
-                    .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
-                    .setTimestamp();
+                    .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") });
                 setTimeout(() => {
                     interaction.editReply({ content: "", embeds: [embed] });
                 }, 1000);
@@ -97,8 +95,7 @@ module.exports = {
                     .setTitle(getEnv("ERROR"))
                     .setDescription(`\`\`\`${e}\`\`\``)
                     .setColor("#ff0000")
-                    .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
-                    .setTimestamp();
+                    .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") });
                 await interaction.editReply({ content: "", embeds: [embed] });
                 console.error(e);
                 return;
@@ -115,12 +112,12 @@ module.exports = {
                     .setTitle(getEnv("ERROR"))
                     .setDescription(`\`\`\`先にボイスチャンネルに参加してください。\`\`\``)
                     .setColor("#ff0000")
-                    .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
-                    .setTimestamp();
+                    .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") });
                 await interaction.editReply({ embeds: [embed] });
                 return;
             }
             try {
+                // @ts-ignore
                 const queue = GuildMusicQueue.getOrCreate(channel);
                 queue.addRequest(parsedRequest);
 
@@ -151,17 +148,15 @@ module.exports = {
                         }
                     )
                     .setImage(parsedRequest.videoThumbnailUrl)
-                    .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
                     .setColor("#00ffff")
-                    .setTimestamp();
+                    .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") });
                 await interaction.editReply({ embeds: [embed] });
             } catch (e) {
                 const embed = new EmbedBuilder()
                     .setTitle(getEnv("ERROR"))
                     .setDescription(`\`\`\`${e}\`\`\``)
                     .setColor("#ff0000")
-                    .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
-                    .setTimestamp();
+                    .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") });
                 await interaction.editReply({ content: "", embeds: [embed] });
                 console.error(e);
                 return;

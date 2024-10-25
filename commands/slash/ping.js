@@ -11,9 +11,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setTitle(`Ping: ${client.ws.ping} ms`)
             .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
-            .setColor("#00ffff")
-            .setTimestamp()
-            .toJSON();
+            .setColor("#00ffff");
         return interaction.reply({ embeds: [embed] });
     }
 };

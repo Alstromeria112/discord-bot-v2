@@ -16,9 +16,7 @@ module.exports = {
                 text: getEnv("POWERED"),
                 iconURL: getEnv("ICON_URL")
             })
-            .setColor("#00ffff")
-            .setTimestamp()
-            .toJSON();
+            .setColor("#00ffff");
         await message.reply({ embeds: [embed] });
     }
 };

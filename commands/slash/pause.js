@@ -21,8 +21,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle(getEnv("ERROR"))
                 .setDescription(`\`\`\`先にボイスチャンネルに参加してください。\`\`\``)
-                .setColor("#ff0000")
-                .setTimestamp();
+                .setColor("#ff0000");
             await interaction.reply({ embeds: [embed] });
             return;
         }
@@ -32,8 +31,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle(getEnv("ERROR"))
                 .setDescription(`\`\`\`プレイリストが存在しません。\`\`\``)
-                .setColor("#ff0000")
-                .setTimestamp();
+                .setColor("#ff0000");
             await interaction.reply({ embeds: [embed] });
             return;
         }
@@ -43,8 +41,7 @@ module.exports = {
                 .setDescription(
                     `\`\`\`プレイリストはそのチャンネルに属していません。<#${queue.voiceChannelId}>に参加してください。\`\`\``
                 )
-                .setColor("#ff0000")
-                .setTimestamp();
+                .setColor("#ff0000");
             await interaction.reply({ embeds: [embed] });
             return;
         }

@@ -21,8 +21,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle("Reloading...")
                 .setColor("#ff0000")
-                .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
-                .setTimestamp();
+                .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") });
             await interaction.reply({ embeds: [embed] });
             console.log("Reloading...");
 
@@ -30,16 +29,14 @@ module.exports = {
             const suc = new EmbedBuilder()
                 .setTitle(getEnv("SUCCESS"))
                 .setColor("#00ffff")
-                .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
-                .setTimestamp();
+                .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") });
             await interaction.editReply({ embeds: [suc] });
         } catch (e) {
             const embed = new EmbedBuilder()
                 .setTitle(getEnv("ERROR"))
                 .setDescription(`\`\`\`${e}\`\`\``)
                 .setColor("#ff0000")
-                .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
-                .setTimestamp();
+                .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") });
             await interaction.editReply({ embeds: [embed] });
         }
     }

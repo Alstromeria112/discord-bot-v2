@@ -32,7 +32,7 @@ client.on("interactionCreate", async interaction => {
                 .setDescription(`\`\`\`${e}\`\`\``)
                 .setColor(Colors.Red)
                 .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") });
-            await interaction.reply({ embeds: [embed] });
+            await interaction.followUp({ embeds: [embed] });
             console.error(e);
             return;
         }
