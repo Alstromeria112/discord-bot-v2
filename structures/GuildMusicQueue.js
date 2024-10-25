@@ -108,9 +108,7 @@ class ParsedMusicInfo {
         }
         async function requestYtsr(query) {
             const ytsrResult = await ytsr(query);
-            const video = /** @type {import("ytsr").Video} */ (
-                ytsrResult.items.find(res => res.type === "video")
-            );
+            const video = /** @type {import("ytsr").Video} */ (ytsrResult.items.find(res => res.type === "video"));
             return {
                 url: video.url,
                 name: video.title,
@@ -120,18 +118,10 @@ class ParsedMusicInfo {
                 authorIcon: video.author?.bestAvatar?.url ?? void 0
             };
         }
-        const { url, name, thumbnail, authorUrl, authorName, authorIcon } = await (
-            isUrl ? requestYtdl : requestYtsr
-        )(query);
-        return new ParsedMusicInfo(
-            privateSymbol,
-            url,
-            name,
-            thumbnail,
-            authorUrl,
-            authorName,
-            authorIcon
+        const { url, name, thumbnail, authorUrl, authorName, authorIcon } = await (isUrl ? requestYtdl : requestYtsr)(
+            query
         );
+        return new ParsedMusicInfo(privateSymbol, url, name, thumbnail, authorUrl, authorName, authorIcon);
     }
 }
 
@@ -288,9 +278,7 @@ class GuildMusicQueue {
             inlineVolume: true
         });
 
-        this.#volumeTransformer = /** @type {import("prism-media").VolumeTransformer} */ (
-            resource.volume
-        );
+        this.#volumeTransformer = /** @type {import("prism-media").VolumeTransformer} */ (resource.volume);
         this.#volumeTransformer.setVolume(5 / 100);
 
         this.#player.play(resource);
@@ -320,6 +308,7 @@ class GuildMusicQueue {
      */
     static getOrCreate(voiceChannel) {
         const connection = joinVoiceChannel({
+            // @ts-ignore
             adapterCreator: voiceChannel.guild.voiceAdapterCreator,
             channelId: voiceChannel.id,
             guildId: voiceChannel.guildId,
