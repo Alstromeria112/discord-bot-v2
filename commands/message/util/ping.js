@@ -1,9 +1,9 @@
 // @ts-check
 
 const { EmbedBuilder } = require("discord.js");
-const { getEnv } = require("../../util");
+const { getEnv } = require("../../../util");
 
-/** @type {import("../../type").MessageCommand} */
+/** @type {import("../../../type").MessageCommand} */
 module.exports = {
     data: {
         name: "ping"

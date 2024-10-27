@@ -3,21 +3,18 @@
 "use strict";
 
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
-const { GuildMusicQueue } = require("../../structures/GuildMusicQueue.js");
-const { getEnv } = require("../../util.js");
+const { GuildMusicQueue } = require("../../../structures/GuildMusicQueue.js");
+const { getEnv } = require("../../../util.js");
 
-/** @type {import("../../type").SlashCommand} */
+/** @type {import("../../../type.js").SlashCommand} */
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("loop")
-        .setDescription("曲をループします。")
+        .setName("pause")
+        .setDescription("曲を一時停止します")
         .setDMPermission(false)
-        .addSubcommand(subcommand =>
-            subcommand.setName("queue").setDescription("プレイリストのすべての曲をループします。")
-        )
         .toJSON(),
     handler: async interaction => {
-        if (!interaction.inCachedGuild() || !interaction.isChatInputCommand()) return;
+        if (!interaction.inCachedGuild()) return;
 
         const channel = interaction.member.voice.channel;
         if (!channel) {
@@ -48,10 +45,7 @@ module.exports = {
             await interaction.reply({ embeds: [embed] });
             return;
         }
-
-        if (interaction.options.getSubcommand() === "queue") {
-            queue.toggleLoop();
-        }
+        queue.pause();
         await interaction.reply(getEnv("SUCCESS"));
     }
 };
