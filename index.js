@@ -5,7 +5,7 @@ Error.stackTraceLimit = Infinity;
 
 const { Client, EmbedBuilder, GatewayIntentBits: IntentBits, Colors } = require("discord.js");
 const { slashCommands, messageCommands, reloadCommands } = require("./commands-manager.js");
-const { getEnv } = require("./util.js");
+const { getEnv, sendEmbed } = require("./util.js");
 require("dotenv/config.js");
 
 const client = new Client({
@@ -13,12 +13,15 @@ const client = new Client({
 });
 
 client.on("interactionCreate", async interaction => {
-    if (interaction.isChatInputCommand()) {
-        const command = slashCommands.get(interaction.commandName);
+    if (interaction.isChatInputCommand() || interaction.isButton()) {
+        const commandName = interaction.isChatInputCommand()
+            ? interaction.commandName
+            : interaction.customId.slice(0, interaction.customId.indexOf("/"));
+        const command = slashCommands.get(commandName);
         if (!command) {
             const err_embed = new EmbedBuilder()
                 .setTitle(getEnv("ERROR"))
-                .setDescription(`Unknown interaction: ${interaction.commandName}`)
+                .setDescription(`Unknown interaction: ${commandName}`)
                 .setColor("#ff0000")
                 .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") });
             interaction.reply({ embeds: [err_embed] });
@@ -26,6 +29,7 @@ client.on("interactionCreate", async interaction => {
         }
         try {
             await command.handler(interaction);
+            return sendEmbed(interaction);
         } catch (e) {
             const embed = new EmbedBuilder()
                 .setTitle(getEnv("ERROR"))
