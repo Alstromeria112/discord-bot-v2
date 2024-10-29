@@ -2,7 +2,7 @@
 
 "use strict";
 
-const { ButtonInteraction, ChatInputCommandInteraction, ChannelType, EmbedBuilder, Colors } = require("discord.js");
+const { ButtonInteraction, ChatInputCommandInteraction, ChannelType, EmbedBuilder } = require("discord.js");
 
 /**
  * @param {string} name
@@ -64,7 +64,7 @@ async function sendEmbed(interaction) {
                 { name: "Type", value: `\`\`\`${interactionType}\`\`\``, inline: true },
                 { name: "Command", value: `\`\`\`${commandType}\`\`\``, inline: false }
             )
-            .setColor(Colors.Aqua)
+            .setColor("#0000ff")
             .setFooter({ text: getEnv("POWERED"), iconURL: getEnv("ICON_URL") })
             .setTimestamp();
         return channel.send({ embeds: [embed] });
