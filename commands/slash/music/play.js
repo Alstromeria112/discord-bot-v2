@@ -38,7 +38,6 @@ module.exports = {
             }
             await interaction.editReply("リストの中身を取得中...");
             try {
-                // @ts-ignore
                 const queue = GuildMusicQueue.getOrCreate(channel);
                 const { items, author, title, views, thumbnails, description, url } = await ytpl(playlistId);
 
