@@ -1,6 +1,6 @@
 <div id="top"></div>
 
-# Discord-Bot
+# Djs-Bot-v14
 
 ## 準備
 
